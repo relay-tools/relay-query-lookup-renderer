@@ -32,6 +32,9 @@ import QueryLookupRenderer from 'relay-query-lookup-renderer';
 
 ```
 
+All props are the same as the [QueryRenderer](https://facebook.github.io/relay/docs/query-renderer.html) included in relay except for 
+* `lookup` If true, check the relay store for data first. If false or null, you will get the same behavior of the standard `QueryRenderer`.
+
 
 ## Server Side Rendering (Isomorphic)
 This component is useful for isomorphic/universal/server side rendered relay apps. It will immediately render data from the store if it is there.
