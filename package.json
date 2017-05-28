@@ -1,0 +1,20 @@
+{
+  "name": "relay-query-lookup-renderer",
+  "version": "1.0.0",
+  "description": "Same as Relay Modern's QueryRenderer, but will check the store for data before fetching.",
+  "main": "index.js",
+  "repository": "https://github.com/robrichard/relay-query-lookup-renderer",
+  "author": "Rob Richard",
+  "license": "MIT",
+  "dependencies": {
+    "deep-freeze": "^0.0.1",
+    "fbjs": "^0.8.1",
+    "prop-types": "^15.5.10"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0-a || ^15.0.0 || ^0.14.0"
+  },
+  "devDependencies": {
+    "jest": "^20.0.4"
+  }
+}
