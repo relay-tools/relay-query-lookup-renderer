@@ -5,7 +5,7 @@ Taken from react-relay QueryRenderer with one addition.
 - lookup prop will check the relay store for data first and if present will immediately call `render` with props.
 
 This will not be necessary if this PR is merged:
-https://github.com/facebook/relay/pull/176
+https://github.com/facebook/relay/pull/1760
 
 ## Install
 yarn add relay-query-lookup-renderer
