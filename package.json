@@ -7,7 +7,8 @@
   "author": "Rob Richard",
   "license": "MIT",
   "scripts": {
-    "compile": "babel ./src -d ./dist --ignore test.js"
+    "compile": "babel ./src -d ./dist --ignore test.js",
+    "test": "jest"
   },
   "dependencies": {
     "deep-freeze": "^0.0.1",
@@ -15,16 +16,22 @@
     "prop-types": "^15.5.7"
   },
   "peerDependencies": {
-    "react": "^16.0.0-a || ^15.0.0 || ^0.14.0"
+    "react": "^16.0.0-a || ^15.0.0 || ^0.14.0",
+    "relay-runtime": "^1.4.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
+    "babel-plugin-syntax-flow": "^6.18.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
+    "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
-    "jest": "^20.0.4"
+    "jest": "^21.2.1",
+    "relay-mock-network-layer": "^1.1.0",
+    "relay-runtime": "^1.4.1"
   },
   "files": [
     "dist"
