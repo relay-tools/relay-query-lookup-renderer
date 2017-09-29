@@ -1,8 +1,9 @@
 # relay-query-lookup-renderer
 Same as Relay Modern's QueryRenderer, but will check the store for data before fetching.
 
-Taken from react-relay QueryRenderer with one addition.
+Taken from react-relay QueryRenderer with two additions.
 - lookup prop will check the relay store for data first and if present will immediately call `render` with props.
+- retain prop will prevent the component from garbage collecting when unmounted.
 
 This will not be necessary if this PR is merged:
 https://github.com/facebook/relay/pull/1760
