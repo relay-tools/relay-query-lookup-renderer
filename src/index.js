@@ -116,7 +116,7 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
                 variables: operation.variables,
             };
             if (props.lookup && environment.check(operation.root)) {
-                environment.retain(operation.root);
+                this._selectionReference = environment.retain(operation.root);
 
                 // data is available in the store, render without making any requests
                 const snapshot = environment.lookup(operation.fragment);
