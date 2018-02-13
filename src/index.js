@@ -120,6 +120,8 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
 
                 // data is available in the store, render without making any requests
                 const snapshot = environment.lookup(operation.fragment);
+                this._rootSubscription = environment.subscribe(snapshot, this._onChange);
+
                 return {
                     error: null,
                     props: snapshot.data,
