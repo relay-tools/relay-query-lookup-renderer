@@ -5,7 +5,7 @@ global.requestAnimationFrame = (cb) => {
     setTimeout(cb, 0)
 };
 
-const QueryRenderer = require('../src/index');
+const QueryRenderer = require('../../src/index');
 const { configure, mount } = require('enzyme');
 const Adapter = require('enzyme-adapter-react-16');
 const React = require('react');
@@ -22,7 +22,7 @@ const {
 const getNetworkLayer = require('relay-mock-network-layer');
 
 const query = graphql`
-    query testQuery ($id: Int!) {
+    query testQuery ($id: ID!) {
         author(id: $id) {
             firstName
         }
@@ -38,7 +38,7 @@ function sleep() {
 function getEnvironment() {
     const networkLayer = getNetworkLayer({
         schema: fs.readFileSync(
-            path.resolve(__dirname, './schema.graphql'),
+            path.resolve(__dirname, '../schema.graphql'),
             {encoding: 'utf8'}
         )
     });

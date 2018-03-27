@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "compile": "babel ./src -d ./dist --ignore test.js",
-    "relay": "relay-compiler --src __test__ --schema __test__/schema.graphql --ignore 'node_modules/**'",
+    "relay": "relay-compiler --src __test__/test --schema __test__/schema.graphql --ignore 'node_modules/**'",
     "test": "jest"
   },
   "dependencies": {
@@ -18,12 +18,12 @@
   },
   "peerDependencies": {
     "react": "^16.0.0-a || ^15.0.0 || ^0.14.0",
-    "relay-runtime": "^1.4.1"
+    "relay-runtime": "^1.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
-    "babel-plugin-relay": "^1.4.1",
+    "babel-plugin-relay": "^1.5.0",
     "babel-plugin-syntax-flow": "^6.18.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -38,9 +38,9 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0",
-    "relay-compiler": "^1.4.1",
+    "relay-compiler": "^1.5.0",
     "relay-mock-network-layer": "^1.1.0",
-    "relay-runtime": "^1.4.1"
+    "relay-runtime": "^1.5.0"
   },
   "files": [
     "dist"
