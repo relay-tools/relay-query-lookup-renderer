@@ -7,7 +7,7 @@
   "author": "Rob Richard",
   "license": "MIT",
   "scripts": {
-    "compile": "babel ./src -d ./dist --ignore test.js",
+    "prepublishOnly": "babel ./src -d ./dist --ignore test.js",
     "relay": "relay-compiler --src __test__/test --schema __test__/schema.graphql --ignore 'node_modules/**'",
     "test": "jest"
   },
