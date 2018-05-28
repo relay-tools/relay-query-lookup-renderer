@@ -115,22 +115,23 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
                 environment,
                 variables: operation.variables,
             };
-            if (props.lookup && environment.check(operation.root)) {
+            if (props.lookup) {
                 this._selectionReference = environment.retain(operation.root);
+                if (environment.check(operation.root)) {
+                    // data is available in the store, render without making any requests
+                    const snapshot = environment.lookup(operation.fragment);
+                    this._rootSubscription = environment.subscribe(snapshot, this._onChange);
 
-                // data is available in the store, render without making any requests
-                const snapshot = environment.lookup(operation.fragment);
-                this._rootSubscription = environment.subscribe(snapshot, this._onChange);
-
-                return {
-                    error: null,
-                    props: snapshot.data,
-                    retry: () => {
-                        this._fetch(operation, props.cacheConfig);
-                    },
-                };
-            } else {
-                return this._fetch(operation, props.cacheConfig) || getDefaultState();
+                    return {
+                        error: null,
+                        props: snapshot.data,
+                        retry: () => {
+                            this._fetch(operation, props.cacheConfig);
+                        },
+                    };
+                } else {
+                    return this._fetch(operation, props.cacheConfig) || getDefaultState();
+                }
             }
         } else {
             this._relayContext = {
