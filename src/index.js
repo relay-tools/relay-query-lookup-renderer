@@ -164,7 +164,7 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
         if (this._pendingFetch) {
             this._pendingFetch.dispose();
         }
-        if (this._rootSubscription) {
+        if (!this.props.retain && this._rootSubscription) {
             this._rootSubscription.dispose();
         }
 
@@ -196,7 +196,7 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
                         },
                     };
 
-                    if (this._selectionReference) {
+                    if (!this.props.retain && this._selectionReference) {
                         this._selectionReference.dispose();
                     }
                     this._rootSubscription = environment.subscribe(
