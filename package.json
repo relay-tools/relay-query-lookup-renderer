@@ -1,6 +1,6 @@
 {
   "name": "relay-query-lookup-renderer",
-  "version": "4.0.0-rc.1",
+  "version": "4.0.0-rc.2",
   "description": "Same as Relay Modern's QueryRenderer, but will check the store for data before fetching.",
   "main": "./dist/index.js",
   "repository": "https://github.com/robrichard/relay-query-lookup-renderer",
