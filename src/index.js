@@ -107,10 +107,10 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
         const {query, variables} = props;
         if (query) {
             const {
-                createOperationSelector,
+                createOperationDescriptor,
                 getRequest,
             } = environment.unstable_internal;
-            const operation = createOperationSelector(getRequest(query), variables);
+            const operation = createOperationDescriptor(getRequest(query), variables);
             this._relayContext = {
                 environment,
                 variables: operation.variables,
