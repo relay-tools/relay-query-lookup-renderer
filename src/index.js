@@ -260,7 +260,7 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
         //     deepFreeze(this.state.readyState);
         // }
         return (
-            <ReactRelayContext.Provider value={{this._relayContext}}>
+            <ReactRelayContext.Provider value={this._relayContext}>
                 {this.props.render(this.state.readyState)}
             </ReactRelayContext.Provider>
         );
