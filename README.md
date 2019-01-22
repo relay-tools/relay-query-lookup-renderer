@@ -1,12 +1,11 @@
 # relay-query-lookup-renderer
 Same as Relay Modern's QueryRenderer, but will check the store for data before fetching.
 
+Version >=4.0.0 are only compatible with react-relay@>=2.0.0-rc.2
+
 Taken from react-relay QueryRenderer with two additions.
 - lookup prop will check the relay store for data first and if present will immediately call `render` with props.
 - retain prop will prevent the component from garbage collecting when unmounted.
-
-This will not be necessary if this PR is merged:
-https://github.com/facebook/relay/pull/1760
 
 ## Install
 yarn add relay-query-lookup-renderer
@@ -37,9 +36,6 @@ All props are the same as the [QueryRenderer](https://facebook.github.io/relay/d
 * `lookup` If true, check the relay store for data first. If false or null, you will get the same behavior of the standard `QueryRenderer`.
 
 
-## Server Side Rendering (Isomorphic)
-This component is useful for isomorphic/universal/server side rendered relay apps. It will immediately render data from the store if it is there.
-
 ### Example
 See the full example here: https://github.com/robrichard/relay-modern-isomorphic-example
 
@@ -48,8 +44,8 @@ See the full example here: https://github.com/robrichard/relay-modern-isomorphic
 ```js
 import query from './myQuery';
 import {
-    createOperationSelector,
-    getOperation,
+    createOperationDescriptor,
+    getRequest,
     Environment,
     RecordSource,
     Store,
@@ -63,8 +59,8 @@ export default function(req, res, next) {
     const store = new Store(source);
     const environment = new Environment({network: myNetworkLayer, store});
     const variables = {};
-    const operation = createOperationSelector(
-        getOperation(query),
+    const operation = createOperationDescriptor(
+        getRequest(query),
         variables
     );
     

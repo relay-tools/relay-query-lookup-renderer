@@ -1,9 +1,9 @@
 'use strict';
 
 const React = require('react');
-const PropTypes = require('prop-types');
 const areEqual = require('fbjs/lib/areEqual');
 const deepFreeze = require('deep-freeze');
+const {ReactRelayContext} = require('react-relay');
 
 import type {CacheConfig, Disposable} from 'RelayCombinedEnvironmentTypes';
 import type {RelayEnvironmentInterface as ClassicEnvironment} from 'RelayEnvironment';
@@ -49,8 +49,8 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
     _rootSubscription: ?Disposable;
     _selectionReference: ?Disposable;
 
-    constructor(props: Props, context: Object) {
-        super(props, context);
+    constructor(props: Props) {
+        super(props);
         this._pendingFetch = null;
         this._rootSubscription = null;
         this._selectionReference = null;
@@ -252,12 +252,6 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
         });
     };
 
-    getChildContext(): Object {
-        return {
-            relay: this._relayContext,
-        };
-    }
-
     render() {
         // Note that the root fragment results in `readyState.props` is already
         // frozen by the store; this call is to freeze the readyState object and
@@ -265,13 +259,13 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
         // if (__DEV__) {
         //     deepFreeze(this.state.readyState);
         // }
-        return this.props.render(this.state.readyState);
+        return (
+            <ReactRelayContext.Provider value={{this._relayContext}}>
+                {this.props.render(this.state.readyState)}
+            </ReactRelayContext.Provider>
+        );
     }
 }
-
-ReactRelayQueryRenderer.childContextTypes = {
-    relay: PropTypes.object.isRequired,
-};
 
 function getDefaultState(): ReadyState {
     return {
