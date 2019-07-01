@@ -119,7 +119,7 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
                 this._selectionReference = environment.retain(operation.root);
 
                 // data is available in the store, render without making any requests
-                const snapshot = environment.lookup(operation.fragment);
+                const snapshot = environment.lookup(operation.fragment, operation);
                 this._rootSubscription = environment.subscribe(snapshot, this._onChange);
 
                 return {
@@ -181,7 +181,7 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
                     if (snapshot) {
                         return;
                     }
-                    snapshot = environment.lookup(operation.fragment);
+                    snapshot = environment.lookup(operation.fragment, operation);
                     readyState = {
                         error: null,
                         props: snapshot.data,
