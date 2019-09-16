@@ -4,6 +4,7 @@ const React = require('react');
 const areEqual = require('fbjs/lib/areEqual');
 const deepFreeze = require('deep-freeze');
 const {ReactRelayContext} = require('react-relay');
+const {createOperationDescriptor, getRequest} = require('relay-runtime');
 
 import type {CacheConfig, Disposable} from 'RelayCombinedEnvironmentTypes';
 import type {RelayEnvironmentInterface as ClassicEnvironment} from 'RelayEnvironment';
@@ -106,14 +107,10 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
 
         const {query, variables} = props;
         if (query) {
-            const {
-                createOperationDescriptor,
-                getRequest,
-            } = environment.unstable_internal;
             const operation = createOperationDescriptor(getRequest(query), variables);
             this._relayContext = {
                 environment,
-                variables: operation.variables,
+                variables: operation.variables || {},
             };
             if (props.lookup && environment.check(operation.root)) {
                 this._selectionReference = environment.retain(operation.root);
