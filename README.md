@@ -64,7 +64,7 @@ export default function(req, res, next) {
         variables
     );
     
-    environment.retain(operation.root);
+    environment.retain(operation);
     environment.sendQuery({
         operation,
         onCompleted: () => {

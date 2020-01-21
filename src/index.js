@@ -3,19 +3,14 @@
 const React = require('react');
 const areEqual = require('fbjs/lib/areEqual');
 const deepFreeze = require('deep-freeze');
-const {ReactRelayContext} = require('react-relay');
-const {createOperationDescriptor, getRequest} = require('relay-runtime');
+const { ReactRelayContext } = require('react-relay');
+const { createOperationDescriptor, getRequest } = require('relay-runtime');
 
-import type {CacheConfig, Disposable} from 'RelayCombinedEnvironmentTypes';
-import type {RelayEnvironmentInterface as ClassicEnvironment} from 'RelayEnvironment';
-import type {GraphQLTaggedNode} from 'RelayModernGraphQLTag';
-import type {
-    Environment,
-    OperationSelector,
-    RelayContext,
-    Snapshot,
-} from 'RelayStoreTypes';
-import type {RerunParam, Variables} from 'RelayTypes';
+import type { CacheConfig, Disposable } from 'RelayCombinedEnvironmentTypes';
+import type { RelayEnvironmentInterface as ClassicEnvironment } from 'RelayEnvironment';
+import type { GraphQLTaggedNode } from 'RelayModernGraphQLTag';
+import type { Environment, OperationSelector, RelayContext, Snapshot } from 'RelayStoreTypes';
+import type { RerunParam, Variables } from 'RelayTypes';
 
 export type Props = {
     cacheConfig?: ?CacheConfig,
@@ -61,7 +56,7 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
         };
     }
 
-    componentWillReceiveProps(nextProps: Props): void {
+    UNSAFE_componentWillReceiveProps(nextProps: Props): void {
         if (
             nextProps.query !== this.props.query ||
             nextProps.environment !== this.props.environment ||
@@ -79,8 +74,7 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
 
     shouldComponentUpdate(nextProps: Props, nextState: State): boolean {
         return (
-            nextProps.render !== this.props.render ||
-            nextState.readyState !== this.state.readyState
+            nextProps.render !== this.props.render || nextState.readyState !== this.state.readyState
         );
     }
 
@@ -105,15 +99,15 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
         // $FlowFixMe
         const environment: Environment = props.environment;
 
-        const {query, variables} = props;
+        const { query, variables } = props;
         if (query) {
             const operation = createOperationDescriptor(getRequest(query), variables);
             this._relayContext = {
                 environment,
                 variables: operation.variables || {},
             };
-            if (props.lookup && environment.check(operation.root)) {
-                this._selectionReference = environment.retain(operation.root);
+            if (props.lookup && environment.check(operation) !== 'missing') {
+                this._selectionReference = environment.retain(operation);
 
                 // data is available in the store, render without making any requests
                 const snapshot = environment.lookup(operation.fragment, operation);
@@ -144,14 +138,14 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
     }
 
     _fetch(operation: OperationSelector, cacheConfig: ?CacheConfig): ?ReadyState {
-        const {environment} = this._relayContext;
+        const { environment } = this._relayContext;
 
         // Immediately retain the results of the new query to prevent relevant data
         // from being freed. This is not strictly required if all new data is
         // fetched in a single step, but is necessary if the network could attempt
         // to incrementally load data (ex: multiple query entries or incrementally
         // loading records from disk cache).
-        const nextReference = environment.retain(operation.root);
+        const nextReference = environment.retain(operation);
 
         let readyState = getDefaultState();
         let snapshot: ?Snapshot; // results of the root fragment
@@ -166,7 +160,7 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
         }
 
         const request = environment
-            .execute({operation, cacheConfig})
+            .execute({ operation, cacheConfig })
             .finally(() => {
                 this._pendingFetch = null;
             })
@@ -188,7 +182,7 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
                             // of calling setState.
                             const syncReadyState = this._fetch(operation, cacheConfig);
                             if (syncReadyState) {
-                                this.setState({readyState: syncReadyState});
+                                this.setState({ readyState: syncReadyState });
                             }
                         },
                     };
@@ -196,15 +190,12 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
                     if (!this.props.retain && this._selectionReference) {
                         this._selectionReference.dispose();
                     }
-                    this._rootSubscription = environment.subscribe(
-                        snapshot,
-                        this._onChange,
-                    );
+                    this._rootSubscription = environment.subscribe(snapshot, this._onChange);
                     this._selectionReference = nextReference;
                     // This line should be called only once.
                     hasSyncResult = true;
                     if (hasFunctionReturned) {
-                        this.setState({readyState});
+                        this.setState({ readyState });
                     }
                 },
                 error: error => {
@@ -216,7 +207,7 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
                             // handling the case where _fetch may return syncronously instead
                             // of calling setState.
                             const syncReadyState = this._fetch(operation, cacheConfig);
-                            this.setState({readyState: syncReadyState || getDefaultState()});
+                            this.setState({ readyState: syncReadyState || getDefaultState() });
                         },
                     };
                     if (this._selectionReference) {
@@ -225,7 +216,7 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
                     this._selectionReference = nextReference;
                     hasSyncResult = true;
                     if (hasFunctionReturned) {
-                        this.setState({readyState});
+                        this.setState({ readyState });
                     }
                 },
             });

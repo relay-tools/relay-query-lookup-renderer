@@ -16,13 +16,13 @@
     "fbjs": "^0.8.1"
   },
   "peerDependencies": {
-    "react": "^16.0.0-a || ^15.0.0 || ^0.14.0",
-    "relay-runtime": "^2.0.0-rc.2"
+    "react": ">=16.0.0",
+    "relay-runtime": ">=8.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
-    "babel-plugin-relay": "^1.5.0",
+    "babel-plugin-relay": "^8.0.0",
     "babel-plugin-syntax-flow": "^6.18.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -32,14 +32,16 @@
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.0",
-    "graphql": "^0.11.5",
+    "graphql": "^14.5.8",
     "jest": "^21.2.1",
+    "prettier": "^1.19.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-relay": "^8.0.0",
     "react-test-renderer": "^16.0.0",
-    "relay-compiler": "^1.5.0",
-    "relay-mock-network-layer": "^1.1.0",
-    "relay-runtime": "^1.5.0"
+    "relay-compiler": "^8.0.0",
+    "relay-runtime": "^8.0.0",
+    "relay-test-utils": "^8.0.0"
   },
   "files": [
     "dist"

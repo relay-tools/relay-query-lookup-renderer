@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 297427f7d0219fbb0b6bf2582656279a
+ * @relayHash f7ea3234e036808b3905e17f2397bc65
  */
 
 /* eslint-disable */
@@ -10,12 +10,16 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type testQueryVariables = {|
-  id: string,
+  id: string
 |};
 export type testQueryResponse = {|
   +author: ?{|
-    +firstName: ?string,
-  |},
+    +firstName: ?string
+  |}
+|};
+export type testQuery = {|
+  variables: testQueryVariables,
+  response: testQueryResponse,
 |};
 */
 
@@ -44,8 +48,7 @@ v1 = [
   {
     "kind": "Variable",
     "name": "id",
-    "variableName": "id",
-    "type": "ID!"
+    "variableName": "id"
   }
 ],
 v2 = {
@@ -57,28 +60,23 @@ v2 = {
 };
 return {
   "kind": "Request",
-  "operationKind": "query",
-  "name": "testQuery",
-  "id": null,
-  "text": "query testQuery(\n  $id: ID!\n) {\n  author(id: $id) {\n    firstName\n    id\n  }\n}\n",
-  "metadata": {},
   "fragment": {
     "kind": "Fragment",
     "name": "testQuery",
     "type": "Query",
     "metadata": null,
-    "argumentDefinitions": v0,
+    "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
         "name": "author",
         "storageKey": null,
-        "args": v1,
+        "args": (v1/*: any*/),
         "concreteType": "Author",
         "plural": false,
         "selections": [
-          v2
+          (v2/*: any*/)
         ]
       }
     ]
@@ -86,18 +84,18 @@ return {
   "operation": {
     "kind": "Operation",
     "name": "testQuery",
-    "argumentDefinitions": v0,
+    "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
         "name": "author",
         "storageKey": null,
-        "args": v1,
+        "args": (v1/*: any*/),
         "concreteType": "Author",
         "plural": false,
         "selections": [
-          v2,
+          (v2/*: any*/),
           {
             "kind": "ScalarField",
             "alias": null,
@@ -108,8 +106,16 @@ return {
         ]
       }
     ]
+  },
+  "params": {
+    "operationKind": "query",
+    "name": "testQuery",
+    "id": null,
+    "text": "query testQuery(\n  $id: ID!\n) {\n  author(id: $id) {\n    firstName\n    id\n  }\n}\n",
+    "metadata": {}
   }
 };
 })();
+// prettier-ignore
 (node/*: any*/).hash = '38db74baba8c5430573d5cd232564379';
 module.exports = node;
