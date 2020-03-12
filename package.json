@@ -17,12 +17,12 @@
   },
   "peerDependencies": {
     "react": ">=16.0.0",
-    "relay-runtime": ">=8.0.0"
+    "relay-runtime": ">=9.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
-    "babel-plugin-relay": "^8.0.0",
+    "babel-plugin-relay": "^9.0.0",
     "babel-plugin-syntax-flow": "^6.18.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -37,11 +37,11 @@
     "prettier": "^1.19.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-relay": "^8.0.0",
+    "react-relay": "^9.0.0",
     "react-test-renderer": "^16.0.0",
-    "relay-compiler": "^8.0.0",
-    "relay-runtime": "^8.0.0",
-    "relay-test-utils": "^8.0.0"
+    "relay-compiler": "^9.0.0",
+    "relay-runtime": "^9.0.0",
+    "relay-test-utils": "^9.0.0"
   },
   "files": [
     "dist"
