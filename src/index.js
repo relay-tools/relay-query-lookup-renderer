@@ -2,7 +2,6 @@
 
 const React = require('react');
 const areEqual = require('fbjs/lib/areEqual');
-const deepFreeze = require('deep-freeze');
 const { ReactRelayContext } = require('react-relay');
 const { createOperationDescriptor, getRequest } = require('relay-runtime');
 
@@ -198,7 +197,7 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
                         this.setState({ readyState });
                     }
                 },
-                error: error => {
+                error: (error) => {
                     readyState = {
                         error,
                         props: null,
@@ -241,12 +240,6 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
     };
 
     render() {
-        // Note that the root fragment results in `readyState.props` is already
-        // frozen by the store; this call is to freeze the readyState object and
-        // error property if set.
-        // if (__DEV__) {
-        //     deepFreeze(this.state.readyState);
-        // }
         return (
             <ReactRelayContext.Provider value={this._relayContext}>
                 {this.props.render(this.state.readyState)}

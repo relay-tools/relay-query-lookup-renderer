@@ -12,8 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "deep-freeze": "^0.0.1",
-    "fbjs": "^0.8.1"
+    "fbjs": "^1.0.0"
   },
   "peerDependencies": {
     "react": ">=16.0.0",
