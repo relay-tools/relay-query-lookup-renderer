@@ -1,7 +1,7 @@
 'use strict';
 
 const React = require('react');
-const areEqual = require('fbjs/lib/areEqual');
+const areEqual = require('./areEqual');
 const { ReactRelayContext } = require('react-relay');
 const { createOperationDescriptor, getRequest } = require('relay-runtime');
 
@@ -197,7 +197,7 @@ class ReactRelayQueryRenderer extends React.Component<Props, State> {
                         this.setState({ readyState });
                     }
                 },
-                error: (error) => {
+                error: error => {
                     readyState = {
                         error,
                         props: null,

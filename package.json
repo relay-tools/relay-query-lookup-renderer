@@ -11,9 +11,6 @@
     "relay": "relay-compiler --src __test__/test --schema __test__/schema.graphql --ignore 'node_modules/**'",
     "test": "jest"
   },
-  "dependencies": {
-    "fbjs": "^1.0.0"
-  },
   "peerDependencies": {
     "react": ">=16.0.0",
     "relay-runtime": ">=9.0.0"
