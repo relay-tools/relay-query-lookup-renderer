@@ -1,3 +1,6 @@
+# Deprecation notice
+This package is deprecated. It's functionality is now provided by Relay's `useLazyLoadQuery` with the option `fetchPolicy: 'store-or-network'`.
+
 # relay-query-lookup-renderer
 Same as Relay Modern's QueryRenderer, but will check the store for data before fetching.
 
